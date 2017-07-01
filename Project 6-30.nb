@@ -1,0 +1,1928 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     82573,       1920]
+NotebookOptionsPosition[     75098,       1759]
+NotebookOutlinePosition[     75471,       1775]
+CellTagsIndexPosition[     75428,       1772]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Correlations", "Subsection",
+ CellChangeTimes->{{3.7078426927863607`*^9, 
+  3.707842696630764*^9}},ExpressionUUID->"fb34a2db-a007-4e6a-a9cb-\
+b777226abff7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"properties", "=", 
+   RowBox[{"Transpose", "[", 
+    RowBox[{"WDIdataclean", "[", 
+     RowBox[{"[", 
+      RowBox[{
+       RowBox[{"2", ";;"}], ",", 
+       RowBox[{"2", ";;"}]}], "]"}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.707855578678281*^9, 3.707855590424859*^9}, {
+   3.7078557214919133`*^9, 3.707855728982723*^9}, 3.7078558249463873`*^9, 
+   3.7078560316184316`*^9},ExpressionUUID->"fe4d4c91-f06f-42ff-82c5-\
+5bf934dfcdf0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Subsets", "[", 
+   RowBox[{
+    RowBox[{"properties", "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ";;", "5"}], "]"}], "]"}], ",", 
+    RowBox[{"{", "2", "}"}], ",", "5"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.7078560526514196`*^9, 
+  3.7078560958642955`*^9}},ExpressionUUID->"f33f8c5f-7f91-4ba2-bfe7-\
+90e04a3d7dce"],
+
+Cell[BoxData["EditDistance"], "Input",ExpressionUUID->"689c4a59-c19e-43d9-8f70-713323a14ab0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"CorrelationTest", "[", 
+    RowBox[{"DeleteMissing", "[", 
+     RowBox[{
+      RowBox[{"Transpose", "[", "#", "]"}], ",", "1", ",", "2"}], "]"}], 
+    "]"}], "&"}], "/@", 
+  RowBox[{"Subsets", "[", 
+   RowBox[{
+    RowBox[{"RandomSample", "@", "properties"}], ",", 
+    RowBox[{"{", "2", "}"}], ",", "5"}], "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.7078558770058827`*^9},ExpressionUUID->"f142e366-27b8-491d-a578-\
+f2970fd92460"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Length", "[", "#", "]"}], "<", "10"}], ",", "1", ",", 
+     RowBox[{"CorrelationTest", "[", 
+      RowBox[{"DeleteMissing", "[", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "#", "]"}], ",", "1", ",", "2"}], "]"}], 
+      "]"}]}], "]"}], "&"}], "/@", 
+  RowBox[{"Subsets", "[", 
+   RowBox[{
+    RowBox[{"RandomSample", "@", "properties"}], ",", 
+    RowBox[{"{", "2", "}"}], ",", "5"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7078439592098684`*^9, 3.7078441465335727`*^9}, {
+   3.707855812712284*^9, 3.707855815847805*^9}, 
+   3.7078558677319164`*^9},ExpressionUUID->"bdc79f26-4575-486a-b11a-\
+df67590c70c9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"comparisons", "=", 
+   RowBox[{"Subsets", "[", 
+    RowBox[{
+     RowBox[{"Keys", "@", "WDIheadersclean"}], ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7078442659829917`*^9, 3.7078442962857137`*^9}, {
+  3.7078443313090563`*^9, 3.70784433654329*^9}, {3.707855347411478*^9, 
+  3.707855347784836*^9}, {3.707855396071895*^9, 3.7078554475879064`*^9}, {
+  3.7078559175665374`*^9, 
+  3.707855929815296*^9}},ExpressionUUID->"5d52fa77-ac32-49c2-ab26-\
+c8e06535e3c1"],
+
+Cell[BoxData[
+ RowBox[{"Length", "@", "comparisons"}]], "Input",
+ CellChangeTimes->{{3.707844338068704*^9, 
+  3.7078443404017525`*^9}},ExpressionUUID->"b554b73d-3e81-4411-b1bc-\
+8bef6e28a162"],
+
+Cell["get rid of 1000", "Text",
+ CellChangeTimes->{{3.707844457035633*^9, 
+  3.707844460598365*^9}},ExpressionUUID->"d84017c8-32fb-4667-8447-\
+dfb7f43102b0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"correlations", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "#", "]"}], "<", "50"}], ",", "1", ",", 
+       RowBox[{"CorrelationTest", "[", "#", "]"}]}], "]"}], "&"}], "/@", 
+    RowBox[{"DeleteMissing", "[", 
+     RowBox[{
+      RowBox[{"Transpose", "[", 
+       RowBox[{
+        RowBox[{"Subsets", "[", 
+         RowBox[{"props", ",", 
+          RowBox[{"{", "2", "}"}], ",", "1000"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "3", ",", "2"}], "}"}]}], "]"}], ",", "2", ",", 
+      "3"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7078441746534133`*^9, 3.707844250045127*^9}, {
+   3.7078443580922956`*^9, 3.7078443868405294`*^9}, {3.707844422471298*^9, 
+   3.7078444419338226`*^9}, {3.70784478067512*^9, 3.707844791993827*^9}, 
+   3.707845065544911*^9},ExpressionUUID->"a0fcb720-d124-4f79-9d29-\
+f11bf827c09a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["World Development Indicators", "Subsection"]], \
+"Section",
+ CellChangeTimes->{{3.707773395356373*^9, 3.7077734019431596`*^9}},
+ FontSize->14,ExpressionUUID->"af98a9bf-cca6-4c52-a1b3-b94c3b2192a0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WDIraw", "=", 
+   RowBox[{
+   "Import", "[", 
+    "\"\<C:\\\\Users\\\\Ben\\\\Documents\\\\wolfram\\\\Wolfram-Summer-School-\
+2017-Project\\\\Data Sets\\\\WDIEXCEL.csv\>\"", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7076806233290195`*^9, 3.707680631859372*^9}, {
+   3.7076806832658415`*^9, 3.7076807222150717`*^9}, 3.7076807531424904`*^9, {
+   3.707681935830248*^9, 3.7076819556523237`*^9}, {3.707685105326189*^9, 
+   3.707685105932439*^9}, {3.707691747011965*^9, 3.707691749965951*^9}, {
+   3.7078351270043163`*^9, 
+   3.7078351420500913`*^9}},ExpressionUUID->"be4e1f99-a49a-4cfd-ad7b-\
+0c465f377188"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WDIfulldata", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"WDIraw", "[", 
+         RowBox[{"[", 
+          RowBox[{"#", ",", "1"}], "]"}], "]"}], "}"}], ",", 
+       RowBox[{"WDIraw", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"#", ";;", 
+           RowBox[{"#", "+", "1503"}]}], ",", "58"}], "]"}], "]"}]}], "]"}], 
+     "&"}], "/@", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{"47", ",", "263"}], "]"}], "*", "1504"}], "+", "2"}], 
+     ")"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7076920651358376`*^9, 3.7076920726947765`*^9}, {
+   3.7076922340486546`*^9, 3.7076923380801306`*^9}, {3.707692371823743*^9, 
+   3.7076923822823753`*^9}, {3.707692420913207*^9, 3.7076924647794476`*^9}, {
+   3.707692525115038*^9, 3.7076925252219872`*^9}, {3.7076926183429127`*^9, 
+   3.707692656075875*^9}, {3.707692758587716*^9, 3.7076927712085543`*^9}, {
+   3.7076928359089584`*^9, 3.707692855978259*^9}, {3.7076928995971174`*^9, 
+   3.7076929088010435`*^9}, {3.707693178560645*^9, 3.70769320073983*^9}, {
+   3.707693264715839*^9, 3.707693265181675*^9}, 3.7077011477577314`*^9, {
+   3.7077015191386085`*^9, 3.7077015199234304`*^9}, {3.70783513739071*^9, 
+   3.707835147713171*^9}, {3.707835196418679*^9, 3.7078351970583143`*^9}, {
+   3.7078352348591084`*^9, 
+   3.707835235756274*^9}},ExpressionUUID->"b03a6a84-f563-4ef7-ad05-\
+44b8dd71f015"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WDIheaders", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"WDIraw", "[", 
+       RowBox[{"[", 
+        RowBox[{"#", ",", "3"}], "]"}], "]"}], "}"}], "&"}], "/@", 
+    RowBox[{"Range", "[", 
+     RowBox[{"2", ",", 
+      RowBox[{"Length", "[", 
+       RowBox[{"WDIfulldata", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7078400378564167`*^9, 3.707840213531848*^9}, 
+   3.7078403308529983`*^9, {3.707840381709264*^9, 3.7078403918648252`*^9}, {
+   3.707854214279519*^9, 
+   3.7078542289665766`*^9}},ExpressionUUID->"7770350e-a47f-45d5-967d-\
+ff73b2ba750a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WDIcountryrules1", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"#1", "->", 
+      RowBox[{"StringReplace", "[", 
+       RowBox[{"#", ",", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "\"\< and\>\"", ",", "\"\< the\>\"", ",", "\"\<, The\>\"", ",", 
+           "\"\<-\>\"", ",", "\"\< of\>\"", ",", "\"\<People's\>\"", ",", 
+           "\"\<Darussalam\>\"", ",", "\"\<n Federation\>\"", ",", 
+           "\"\<(Bolivarian Republic of)\>\"", ",", 
+           "\"\<(Plurinational State of)\>\"", ",", 
+           "\"\<(Islamic Republic of)\>\"", ",", "\"\<n Arab Republic\>\"", 
+           ",", "\"\<(Federated States of)\>\"", ",", 
+           "\"\<United Republic of\>\"", ",", 
+           "\"\<The former Yugoslav Republic of\>\"", ",", "\"\<, FYR\>\"", 
+           ",", "\"\<, RB\>\"", ",", "\"\<, Rep.\>\"", ",", "\"\<Gaza\>\"", 
+           ",", "\"\<, Fed. Sts.\>\"", ",", "\"\< SAR, China\>\"", ",", 
+           "\"\< \>\""}], "}"}], "\[Rule]", "\"\<\>\""}]}], "]"}]}], "&"}], "/@", 
+    RowBox[{"WDIfulldata", "[", 
+     RowBox[{"[", 
+      RowBox[{
+       RowBox[{"2", ";;"}], ",", "1"}], "]"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.707687526299098*^9, 3.707687552640629*^9}, {
+   3.7076880434485116`*^9, 3.707688046271986*^9}, {3.7076881219709787`*^9, 
+   3.707688125276391*^9}, {3.707688167253264*^9, 3.7076882596681747`*^9}, {
+   3.7076883501093454`*^9, 3.7076884600211706`*^9}, {3.7076884965696297`*^9, 
+   3.7076885578900595`*^9}, {3.7076885989015665`*^9, 
+   3.7076886116615887`*^9}, {3.707688663941883*^9, 3.7076887607976527`*^9}, {
+   3.707688840333879*^9, 3.70768887788068*^9}, {3.707689042366359*^9, 
+   3.7076890605209093`*^9}, {3.7076891023220053`*^9, 3.707689148442237*^9}, {
+   3.707689229686344*^9, 3.707689232857997*^9}, 3.707689292496046*^9, {
+   3.707701825610595*^9, 3.707701859314781*^9}, 3.7077020028728175`*^9, {
+   3.707702083870307*^9, 3.707702093462143*^9}, {3.707702231880971*^9, 
+   3.707702284701044*^9}, {3.7077023330155835`*^9, 3.7077023400361624`*^9}, 
+   3.707702384522335*^9, {3.7077024332694654`*^9, 3.7077024356262846`*^9}, {
+   3.7077026383719893`*^9, 3.7077026446718845`*^9}, {3.707702966364056*^9, 
+   3.707702968895369*^9}, {3.7077030964347196`*^9, 3.707703114638601*^9}, {
+   3.707835156721267*^9, 3.7078351900285816`*^9}, {3.707835254762518*^9, 
+   3.7078352567468233`*^9}, {3.7078398771217585`*^9, 
+   3.7078398797248917`*^9}},ExpressionUUID->"4cea12c5-1866-452a-899c-\
+a3058e666b72"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WDIcountryrules2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<CaboVerde\>\"", "\[Rule]", "\"\<CapeVerde\>\""}], ",", 
+     RowBox[{"\"\<Coted'Ivoire\>\"", "->", "\"\<IvoryCoast\>\""}], ",", 
+     RowBox[{"\"\<LaoDemocraticRepublic\>\"", "\[Rule]", "\"\<Laos\>\""}], 
+     ",", 
+     RowBox[{"\"\<Congo\>\"", "\[Rule]", "\"\<RepublicCongo\>\""}], ",", 
+     RowBox[{
+     "\"\<Congo,Dem.Rep.\>\"", "\[Rule]", "\"\<DemocraticRepublicCongo\>\""}],
+      ",", 
+     RowBox[{
+     "\"\<DemocraticRepublicKorea\>\"", "\[Rule]", "\"\<SouthKorea\>\""}], 
+     ",", 
+     RowBox[{"\"\<RepublicMoldova\>\"", "\[Rule]", "\"\<Moldova\>\""}], ",", 
+     RowBox[{"\"\<RepublicKorea\>\"", "\[Rule]", "\"\<NorthKorea\>\""}], ",", 
+     RowBox[{"\"\<VietNam\>\"", "\[Rule]", "\"\<Vietnam\>\""}], ",", 
+     RowBox[{"\"\<StatePalestine\>\"", "\[Rule]", "\"\<WestBank\>\""}], ",", 
+     RowBox[{"\"\<Egypt,ArabRep.\>\"", "\[Rule]", "\"\<Egypt\>\""}], ",", 
+     RowBox[{"\"\<Iran,IslamicRep.\>\"", "\[Rule]", "\"\<Iran\>\""}], ",", 
+     RowBox[{"\"\<LaoPDR\>\"", "\[Rule]", "\"\<Laos\>\""}], ",", 
+     RowBox[{
+     "\"\<VirginIslands(U.S.)\>\"", "\[Rule]", 
+      "\"\<UnitedStatesVirginIslands\>\""}], ",", 
+     RowBox[{
+     "\"\<SintMaarten(Dutchpart)\>\"", "\[Rule]", "\"\<SintMaarten\>\""}], 
+     ",", 
+     RowBox[{"\"\<SlovakRepublic\>\"", "\[Rule]", "\"\<Slovakia\>\""}], ",", 
+     RowBox[{
+     "\"\<St.Martin(Frenchpart)\>\"", "\[Rule]", "\"\<SaintMartin\>\""}], ",", 
+     RowBox[{"\"\<KyrgyzRepublic\>\"", "\[Rule]", "\"\<Kyrgyzstan\>\""}], ",", 
+     RowBox[{"\"\<St.Lucia\>\"", "\[Rule]", "\"\<SaintLucia\>\""}], ",", 
+     RowBox[{"\"\<St.KittsNevis\>\"", "\[Rule]", "\"\<SaintKittsNevis\>\""}], 
+     ",", 
+     RowBox[{
+     "\"\<St.VincentGrenadines\>\"", "\[Rule]", 
+      "\"\<SaintVincentGrenadines\>\""}], ",", 
+     RowBox[{
+     "\"\<Korea,Dem.People\[AHat]\.80\.99sRep.\>\"", "\[Rule]", 
+      "\"\<NorthKorea\>\""}], ",", 
+     RowBox[{"\"\<Korea\>\"", "\[Rule]", "\"\<SouthKorea\>\""}], ",", 
+     RowBox[{"\"\<MacaoSAR,China\>\"", "\[Rule]", "\"\<Macau\>\""}], ",", 
+     RowBox[{"\"\<IsleMan\>\"", "\[Rule]", "\"\<IsleOfMan\>\""}]}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.707688894807478*^9, 3.7076890276587286`*^9}, {
+   3.7076891736419797`*^9, 3.707689184927518*^9}, {3.7076893737379427`*^9, 
+   3.7076893753432446`*^9}, {3.707689437166299*^9, 3.7076894406280975`*^9}, {
+   3.7076896514246855`*^9, 3.707689656823677*^9}, 3.7076909118760557`*^9, {
+   3.7077018638199778`*^9, 3.7077018640219865`*^9}, {3.7077021328154263`*^9, 
+   3.7077022207823486`*^9}, {3.70770234432533*^9, 3.707702354073615*^9}, {
+   3.70770241774349*^9, 3.7077024594088297`*^9}, {3.7077024979453106`*^9, 
+   3.7077025838923683`*^9}, {3.707702666194804*^9, 3.7077027625579987`*^9}, {
+   3.707702858438263*^9, 3.7077028807124414`*^9}, {3.707703020289504*^9, 
+   3.707703071816245*^9}, {3.7077031289102836`*^9, 3.707703138633472*^9}, {
+   3.7078351665299506`*^9, 3.7078351938746214`*^9}, {3.707835250143236*^9, 
+   3.707835252865077*^9}},ExpressionUUID->"da8d60bb-ee15-40ae-9746-\
+30b4bbfab1f5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WDIdata", "=", 
+   RowBox[{"Join", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Flatten", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Countries\>\"", ",", "WDIheaders"}], "}"}], "]"}], "}"}],
+      ",", 
+     RowBox[{"Replace", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"Flatten", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Entity", "[", 
+              RowBox[{"\"\<Country\>\"", ",", 
+               RowBox[{"#", "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ",", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", 
+               RowBox[{"2", ";;"}], "]"}], "]"}]}], "}"}], "]"}], "&"}], "/@", 
+         RowBox[{"(", 
+          RowBox[{"WDIfulldata", "/.", "WDIcountryrules1"}], ")"}]}], "/.", 
+        RowBox[{"WDIcountryrules2", "[", 
+         RowBox[{"[", 
+          RowBox[{
+           RowBox[{"2", ";;"}], ",", "All"}], "]"}], "]"}]}], ",", 
+       RowBox[{"\"\<\>\"", "\[Rule]", 
+        RowBox[{"Missing", "[", "]"}]}], ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7077015953568115`*^9, 3.70770162347705*^9}, {
+   3.707701677638742*^9, 3.70770174598237*^9}, 3.7077040673454556`*^9, {
+   3.7078352114572735`*^9, 3.7078352598676014`*^9}, {3.7078357525065556`*^9, 
+   3.7078358141649055`*^9}, {3.7078396600124054`*^9, 3.7078396982649584`*^9}, 
+   3.7078399197502604`*^9, 3.707840794227455*^9, 3.7078446360592117`*^9, 
+   3.7078450386112375`*^9, {3.707845321394991*^9, 3.707845339768858*^9}, {
+   3.707845598079037*^9, 3.7078456390519934`*^9}, {3.707845670183014*^9, 
+   3.7078457237950172`*^9}, {3.707845758855669*^9, 3.7078457689065204`*^9}, {
+   3.7078529973027625`*^9, 3.707853050198599*^9}, {3.7078530823248315`*^9, 
+   3.707853090116897*^9}, {3.707853131709219*^9, 3.7078531338856544`*^9}, {
+   3.7078535032790337`*^9, 3.707853518321906*^9}, {3.7078535588508167`*^9, 
+   3.70785357672808*^9}, {3.7078536170609865`*^9, 3.7078536377592893`*^9}, {
+   3.707853705539797*^9, 3.707853753904544*^9}, {3.7078543516131277`*^9, 
+   3.7078543544076757`*^9}, 
+   3.707854668006277*^9},ExpressionUUID->"fe0271a2-62d2-4471-b433-\
+ab7d8d82dac4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WDIdataclean", "=", 
+   RowBox[{"Transpose", "[", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"Transpose", "[", "WDIdata", "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Count", "[", 
+         RowBox[{"#", ",", "_Missing"}], "]"}], "<", "100"}], "&"}]}], "]"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7078533895769653`*^9, 3.707853401150104*^9}, 
+   3.70785466158496*^9},ExpressionUUID->"f44bb678-f32d-43f4-af48-\
+bbdcdda3a355"],
+
+Cell[BoxData[
+ RowBox[{"Length", "[", 
+  RowBox[{"Transpose", "[", "WDIdataclean", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.707845538857357*^9, 3.7078455599942675`*^9}, {
+  3.7078460445562005`*^9, 3.7078460688959336`*^9}, {3.7078461144602656`*^9, 
+  3.707846180441717*^9}, {3.707852104934188*^9, 3.7078521123088183`*^9}, {
+  3.7078521651771955`*^9, 3.7078521669267955`*^9}, {3.7078528883726172`*^9, 
+  3.707852894203394*^9}, {3.7078529532253065`*^9, 3.70785296952606*^9}, {
+  3.7078531651016603`*^9, 3.7078531752653685`*^9}, {3.7078532593760357`*^9, 
+  3.707853264032326*^9}, {3.707853299325282*^9, 
+  3.707853416220049*^9}},ExpressionUUID->"8b43160e-0998-4d76-b1dd-\
+f089ef66a54d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WDIheadersclean", "=", 
+   RowBox[{"Association", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"WDIdataclean", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "#"}], "]"}], "]"}], "\[Rule]", 
+       RowBox[{"#", "-", "1"}]}], "&"}], "/@", 
+     RowBox[{"Range", "[", 
+      RowBox[{"2", ",", 
+       RowBox[{"Length", "[", 
+        RowBox[{"WDIdataclean", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.707853783274844*^9, 3.7078538045698605`*^9}, 
+   3.7078538357929363`*^9, {3.7078542435042963`*^9, 3.7078542901204247`*^9}, {
+   3.7078543980373363`*^9, 3.707854456694674*^9}, {3.707854507381425*^9, 
+   3.7078545400783157`*^9}},ExpressionUUID->"225fe620-b850-4171-959b-\
+80394229d7b6"],
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<WDIdataclean.mx\>\"", ",", "WDIdataclean", ",", "\"\<MX\>\""}],
+   "]"}]], "Input",
+ CellChangeTimes->{{3.707859043259704*^9, 3.707859045881584*^9}, {
+  3.707859276549184*^9, 
+  3.7078593095260305`*^9}},ExpressionUUID->"faaadb7b-326a-4a3f-b8df-\
+95d1f2fdb681"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"WDIdataclean", "[", 
+     RowBox[{"[", 
+      RowBox[{"#", ",", "1"}], "]"}], "]"}], "\[Rule]", 
+    RowBox[{"WDIdataclean", "[", 
+     RowBox[{"[", 
+      RowBox[{"#", ",", 
+       RowBox[{
+        RowBox[{"WDIheadersclean", "[", 
+         RowBox[{"[", "Metric", "]"}], "]"}], "+", "1"}]}], "]"}], "]"}]}], 
+   "&"}], "/@", 
+  RowBox[{"Range", "[", 
+   RowBox[{"1", ",", 
+    RowBox[{"Length", "[", "WDIdataclean", "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7078587943910713`*^9, 3.707858795773828*^9}, 
+   3.70785884015863*^9, {3.7078589600249376`*^9, 3.7078589656143293`*^9}, 
+   3.707859002776349*^9},ExpressionUUID->"9a1d32e0-978d-42ad-9a92-\
+ea29a6783c4c"],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\n", "\t", 
+  RowBox[{
+   RowBox[{"GeoRegionValuePlot", "[", "\n", "\t\t\t\t", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"WDIdataclean", "[", 
+         RowBox[{"[", 
+          RowBox[{"#", ",", "1"}], "]"}], "]"}], "\[Rule]", 
+        RowBox[{"WDIdataclean", "[", 
+         RowBox[{"[", 
+          RowBox[{"#", ",", 
+           RowBox[{
+            RowBox[{"WDIheadersclean", "[", 
+             RowBox[{"[", "Metric", "]"}], "]"}], "+", "1"}]}], "]"}], 
+         "]"}]}], "&"}], "/@", 
+      RowBox[{"Range", "[", 
+       RowBox[{"1", ",", 
+        RowBox[{"Length", "[", "WDIdataclean", "]"}]}], "]"}]}], "\n", 
+     "\t\t\t", ",", 
+     RowBox[{"MissingStyle", "\[Rule]", "White"}], ",", 
+     RowBox[{"GeoRange", "\[Rule]", "Region"}]}], "\t\t", "\n", "\t", "]"}], 
+   ",", "\n", "\t", 
+   RowBox[{"{", 
+    RowBox[{"Metric", ",", 
+     RowBox[{
+      RowBox[{"Normal", "[", "WDIheadersclean", "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"Region", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       NamespaceBox["LinguisticAssistant",
+        DynamicModuleBox[{Typeset`query$$ = "World", Typeset`boxes$$ = 
+         TemplateBox[{"\"Earth\"", 
+           RowBox[{"Entity", "[", 
+             RowBox[{"\"Planet\"", ",", "\"Earth\""}], "]"}], 
+           "\"Entity[\\\"Planet\\\", \\\"Earth\\\"]\"", "\"planet\""}, 
+          "Entity"], 
+         Typeset`allassumptions$$ = {{
+          "type" -> "Clash", "word" -> "World", "template" -> 
+           "Assuming \"${word}\" is ${desc1}. Use as ${desc2} instead", 
+           "count" -> "4", 
+           "Values" -> {{
+             "name" -> "Planet", "desc" -> "a planet", "input" -> 
+              "*C.World-_*Planet-"}, {
+             "name" -> "GeographicRegion", "desc" -> "a geographic region", 
+              "input" -> "*C.World-_*GeographicRegion-"}, {
+             "name" -> "Country", "desc" -> "all countries", "input" -> 
+              "*C.World-_*Country-"}, {
+             "name" -> "Word", "desc" -> "a word", "input" -> 
+              "*C.World-_*Word-"}}}}, Typeset`assumptions$$ = {}, 
+         Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {
+         "Online" -> True, "Allowed" -> True, "mparse.jsp" -> 
+          0.4378118`7.092832456086098, "Messages" -> {}}}, 
+         DynamicBox[ToBoxes[
+           AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, 
+            Dynamic[Typeset`query$$], 
+            Dynamic[Typeset`boxes$$], 
+            Dynamic[Typeset`allassumptions$$], 
+            Dynamic[Typeset`assumptions$$], 
+            Dynamic[Typeset`open$$], 
+            Dynamic[Typeset`querystate$$]], StandardForm],
+          ImageSizeCache->{160., {8., 20.}},
+          
+          TrackedSymbols:>{
+           Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, 
+            Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+         DynamicModuleValues:>{},
+         UndoTrackedVariables:>{Typeset`open$$}],
+        BaseStyle->{"Deploy"},
+        DeleteWithContents->True,
+        Editable->False,
+        SelectWithContents->True], ",", 
+       NamespaceBox["LinguisticAssistant",
+        DynamicModuleBox[{Typeset`query$$ = "Europe", Typeset`boxes$$ = 
+         TemplateBox[{"\"Europe\"", 
+           RowBox[{"Entity", "[", 
+             RowBox[{"\"GeographicRegion\"", ",", "\"Europe\""}], "]"}], 
+           "\"Entity[\\\"GeographicRegion\\\", \\\"Europe\\\"]\"", 
+           "\"geographic region\""}, "Entity"], 
+         Typeset`allassumptions$$ = {{
+          "type" -> "Clash", "word" -> "Europe", "template" -> 
+           "Assuming \"${word}\" is ${desc1}. Use as ${desc2} instead", 
+           "count" -> "3", 
+           "Values" -> {{
+             "name" -> "GeographicRegion", "desc" -> "a continent", "input" -> 
+              "*C.Europe-_*GeographicRegion-"}, {
+             "name" -> "CountryClass", "desc" -> "a class of countries", 
+              "input" -> "*C.Europe-_*CountryClass-"}, {
+             "name" -> "Word", "desc" -> "a word", "input" -> 
+              "*C.Europe-_*Word-"}}}}, Typeset`assumptions$$ = {}, 
+         Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {
+         "Online" -> True, "Allowed" -> True, "mparse.jsp" -> 
+          0.4326244`7.087656003482362, "Messages" -> {}}}, 
+         DynamicBox[ToBoxes[
+           AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, 
+            Dynamic[Typeset`query$$], 
+            Dynamic[Typeset`boxes$$], 
+            Dynamic[Typeset`allassumptions$$], 
+            Dynamic[Typeset`assumptions$$], 
+            Dynamic[Typeset`open$$], 
+            Dynamic[Typeset`querystate$$]], StandardForm],
+          ImageSizeCache->{260., {8., 20.}},
+          
+          TrackedSymbols:>{
+           Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, 
+            Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+         DynamicModuleValues:>{},
+         UndoTrackedVariables:>{Typeset`open$$}],
+        BaseStyle->{"Deploy"},
+        DeleteWithContents->True,
+        Editable->False,
+        SelectWithContents->True], ",", 
+       NamespaceBox["LinguisticAssistant",
+        DynamicModuleBox[{Typeset`query$$ = "South America", Typeset`boxes$$ =
+          TemplateBox[{"\"South America\"", 
+           RowBox[{"EntityClass", "[", 
+             RowBox[{"\"Country\"", ",", "\"SouthAmerica\""}], "]"}], 
+           "\"EntityClass[\\\"Country\\\", \\\"SouthAmerica\\\"]\"", 
+           "\"countries\""}, "EntityClass"], 
+         Typeset`allassumptions$$ = {{
+          "type" -> "Clash", "word" -> "South America", "template" -> 
+           "Assuming \"${word}\" is ${desc1}. Use as ${desc2} instead", 
+           "count" -> "2", 
+           "Values" -> {{
+             "name" -> "CountryClass", "desc" -> "a class of countries", 
+              "input" -> "*C.South+America-_*CountryClass-"}, {
+             "name" -> "GeographicRegion", "desc" -> "a continent", "input" -> 
+              "*C.South+America-_*GeographicRegion-"}}}}, 
+         Typeset`assumptions$$ = {}, Typeset`open$$ = {1, 2}, 
+         Typeset`querystate$$ = {
+         "Online" -> True, "Allowed" -> True, "mparse.jsp" -> 
+          0.5184528`7.166254217803247, "Messages" -> {}}}, 
+         DynamicBox[ToBoxes[
+           AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, 
+            Dynamic[Typeset`query$$], 
+            Dynamic[Typeset`boxes$$], 
+            Dynamic[Typeset`allassumptions$$], 
+            Dynamic[Typeset`assumptions$$], 
+            Dynamic[Typeset`open$$], 
+            Dynamic[Typeset`querystate$$]], StandardForm],
+          ImageSizeCache->{265., {8., 20.}},
+          
+          TrackedSymbols:>{
+           Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, 
+            Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+         DynamicModuleValues:>{},
+         UndoTrackedVariables:>{Typeset`open$$}],
+        BaseStyle->{"Deploy"},
+        DeleteWithContents->True,
+        Editable->False,
+        SelectWithContents->True], ",", 
+       NamespaceBox["LinguisticAssistant",
+        DynamicModuleBox[{Typeset`query$$ = "North America", Typeset`boxes$$ =
+          TemplateBox[{"\"North America\"", 
+           RowBox[{"Entity", "[", 
+             RowBox[{"\"GeographicRegion\"", ",", "\"NorthAmerica\""}], "]"}],
+            "\"Entity[\\\"GeographicRegion\\\", \\\"NorthAmerica\\\"]\"", 
+           "\"geographic region\""}, "Entity"], 
+         Typeset`allassumptions$$ = {{
+          "type" -> "Clash", "word" -> "North America", "template" -> 
+           "Assuming \"${word}\" is ${desc1}. Use as ${desc2} instead", 
+           "count" -> "3", 
+           "Values" -> {{
+             "name" -> "GeographicRegion", "desc" -> "a continent", "input" -> 
+              "*C.North+America-_*GeographicRegion-"}, {
+             "name" -> "CountryClass", "desc" -> "a class of countries", 
+              "input" -> "*C.North+America-_*CountryClass-"}, {
+             "name" -> "City", "desc" -> "a city", "input" -> 
+              "*C.North+America-_*City-"}}}}, Typeset`assumptions$$ = {}, 
+         Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {
+         "Online" -> True, "Allowed" -> True, "mparse.jsp" -> 
+          1.0080403`7.455022888420714, "Messages" -> {}}}, 
+         DynamicBox[ToBoxes[
+           AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, 
+            Dynamic[Typeset`query$$], 
+            Dynamic[Typeset`boxes$$], 
+            Dynamic[Typeset`allassumptions$$], 
+            Dynamic[Typeset`assumptions$$], 
+            Dynamic[Typeset`open$$], 
+            Dynamic[Typeset`querystate$$]], StandardForm],
+          ImageSizeCache->{313., {8., 20.}},
+          
+          TrackedSymbols:>{
+           Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, 
+            Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+         DynamicModuleValues:>{},
+         UndoTrackedVariables:>{Typeset`open$$}],
+        BaseStyle->{"Deploy"},
+        DeleteWithContents->True,
+        Editable->False,
+        SelectWithContents->True], ",", 
+       NamespaceBox["LinguisticAssistant",
+        DynamicModuleBox[{Typeset`query$$ = "Africa", Typeset`boxes$$ = 
+         TemplateBox[{"\"Africa\"", 
+           RowBox[{"Entity", "[", 
+             RowBox[{"\"GeographicRegion\"", ",", "\"Africa\""}], "]"}], 
+           "\"Entity[\\\"GeographicRegion\\\", \\\"Africa\\\"]\"", 
+           "\"geographic region\""}, "Entity"], 
+         Typeset`allassumptions$$ = {{
+          "type" -> "Clash", "word" -> "Africa", "template" -> 
+           "Assuming \"${word}\" is ${desc1}. Use as ${desc2} instead", 
+           "count" -> "3", 
+           "Values" -> {{
+             "name" -> "GeographicRegion", "desc" -> "a continent", "input" -> 
+              "*C.Africa-_*GeographicRegion-"}, {
+             "name" -> "CountryClass", "desc" -> "a class of countries", 
+              "input" -> "*C.Africa-_*CountryClass-"}, {
+             "name" -> "GivenName", "desc" -> "a given name", "input" -> 
+              "*C.Africa-_*GivenName-"}}}}, Typeset`assumptions$$ = {}, 
+         Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {
+         "Online" -> True, "Allowed" -> True, "mparse.jsp" -> 
+          0.42741`7.082389672517314, "Messages" -> {}}}, 
+         DynamicBox[ToBoxes[
+           AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, 
+            Dynamic[Typeset`query$$], 
+            Dynamic[Typeset`boxes$$], 
+            Dynamic[Typeset`allassumptions$$], 
+            Dynamic[Typeset`assumptions$$], 
+            Dynamic[Typeset`open$$], 
+            Dynamic[Typeset`querystate$$]], StandardForm],
+          ImageSizeCache->{248., {8., 20.}},
+          
+          TrackedSymbols:>{
+           Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, 
+            Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+         DynamicModuleValues:>{},
+         UndoTrackedVariables:>{Typeset`open$$}],
+        BaseStyle->{"Deploy"},
+        DeleteWithContents->True,
+        Editable->False,
+        SelectWithContents->True], ",", 
+       NamespaceBox["LinguisticAssistant",
+        DynamicModuleBox[{Typeset`query$$ = "Oceania", Typeset`boxes$$ = 
+         TemplateBox[{"\"Oceania\"", 
+           RowBox[{"EntityClass", "[", 
+             RowBox[{"\"Country\"", ",", "\"Oceania\""}], "]"}], 
+           "\"EntityClass[\\\"Country\\\", \\\"Oceania\\\"]\"", 
+           "\"countries\""}, "EntityClass"], 
+         Typeset`allassumptions$$ = {{
+          "type" -> "Clash", "word" -> "Oceania", "template" -> 
+           "Assuming \"${word}\" is ${desc1}. Use as ${desc2} instead", 
+           "count" -> "4", 
+           "Values" -> {{
+             "name" -> "CountryClass", "desc" -> "a class of countries", 
+              "input" -> "*C.Oceania-_*CountryClass-"}, {
+             "name" -> "Building", "desc" -> "a structure", "input" -> 
+              "*C.Oceania-_*Building-"}, {
+             "name" -> "Movie", "desc" -> "a movie", "input" -> 
+              "*C.Oceania-_*Movie-"}, {
+             "name" -> "Species", "desc" -> "a species specification", 
+              "input" -> "*C.Oceania-_*Species-"}}}}, 
+         Typeset`assumptions$$ = {}, Typeset`open$$ = {1, 2}, 
+         Typeset`querystate$$ = {
+         "Online" -> True, "Allowed" -> True, "mparse.jsp" -> 
+          0.4583954`7.112785244329998, "Messages" -> {}}}, 
+         DynamicBox[ToBoxes[
+           AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, 
+            Dynamic[Typeset`query$$], 
+            Dynamic[Typeset`boxes$$], 
+            Dynamic[Typeset`allassumptions$$], 
+            Dynamic[Typeset`assumptions$$], 
+            Dynamic[Typeset`open$$], 
+            Dynamic[Typeset`querystate$$]], StandardForm],
+          ImageSizeCache->{215., {8., 20.}},
+          
+          TrackedSymbols:>{
+           Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, 
+            Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+         DynamicModuleValues:>{},
+         UndoTrackedVariables:>{Typeset`open$$}],
+        BaseStyle->{"Deploy"},
+        DeleteWithContents->True,
+        Editable->False,
+        SelectWithContents->True], ",", 
+       NamespaceBox["LinguisticAssistant",
+        DynamicModuleBox[{Typeset`query$$ = "Asia", Typeset`boxes$$ = 
+         TemplateBox[{"\"Asia\"", 
+           RowBox[{"Entity", "[", 
+             RowBox[{"\"GeographicRegion\"", ",", "\"Asia\""}], "]"}], 
+           "\"Entity[\\\"GeographicRegion\\\", \\\"Asia\\\"]\"", 
+           "\"geographic region\""}, "Entity"], 
+         Typeset`allassumptions$$ = {{
+          "type" -> "Clash", "word" -> "Asia", "template" -> 
+           "Assuming \"${word}\" is ${desc1}. Use as ${desc2} instead", 
+           "count" -> "3", 
+           "Values" -> {{
+             "name" -> "GeographicRegion", "desc" -> "a continent", "input" -> 
+              "*C.Asia-_*GeographicRegion-"}, {
+             "name" -> "CountryClass", "desc" -> "a class of countries", 
+              "input" -> "*C.Asia-_*CountryClass-"}, {
+             "name" -> "GivenName", "desc" -> "a given name", "input" -> 
+              "*C.Asia-_*GivenName-"}}}}, Typeset`assumptions$$ = {}, 
+         Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {
+         "Online" -> True, "Allowed" -> True, "mparse.jsp" -> 
+          0.4241778`7.079092928799117, "Messages" -> {}}}, 
+         DynamicBox[ToBoxes[
+           AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, 
+            Dynamic[Typeset`query$$], 
+            Dynamic[Typeset`boxes$$], 
+            Dynamic[Typeset`allassumptions$$], 
+            Dynamic[Typeset`assumptions$$], 
+            Dynamic[Typeset`open$$], 
+            Dynamic[Typeset`querystate$$]], StandardForm],
+          ImageSizeCache->{237., {8., 20.}},
+          
+          TrackedSymbols:>{
+           Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, 
+            Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+         DynamicModuleValues:>{},
+         UndoTrackedVariables:>{Typeset`open$$}],
+        BaseStyle->{"Deploy"},
+        DeleteWithContents->True,
+        Editable->False,
+        SelectWithContents->True]}], "}"}]}], "}"}]}], "\n", "]"}]], "Input",
+ CellChangeTimes->{{3.707835823523719*^9, 3.707835830941778*^9}, 
+   3.707839183314474*^9, {3.707839594751589*^9, 3.707839607608201*^9}, 
+   3.707839903497551*^9, 3.707840240939993*^9, {3.7078404764607415`*^9, 
+   3.707840501862872*^9}, 3.7078423658701487`*^9, {3.707853424861483*^9, 
+   3.7078534875305367`*^9}, {3.707853839140688*^9, 3.7078538638439474`*^9}, {
+   3.7078541337227216`*^9, 3.7078541377239075`*^9}, 3.707854301526677*^9, 
+   3.7078544725244637`*^9, {3.707854598662388*^9, 3.7078546181983633`*^9}, {
+   3.707854780200306*^9, 3.707854799319851*^9}, {3.7078551109653583`*^9, 
+   3.707855235819268*^9}, 3.707857803638585*^9, 
+   3.7078579166901894`*^9},ExpressionUUID->"98ba5748-de69-4ee8-a846-\
+94c8ef8ad9aa"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Global Health DALYs", "Subsection"]], "Section",
+ CellChangeTimes->{{3.707773492470165*^9, 
+  3.707773499995537*^9}},ExpressionUUID->"2f3ccbaf-b6a0-4d33-aad9-\
+7126918314ce"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WHOraw", "=", 
+   RowBox[{
+   "Import", "[", 
+    "\"\<C:\\\\Users\\\\Ben\\\\Documents\\\\wolfram\\\\Wolfram-Summer-School-\
+2017-Project\\\\Data Sets\\\\GHE2015_DALYs-2015-country.csv\>\"", "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.7076807352760344`*^9, 3.7076807551908593`*^9}, {
+   3.7077038489710875`*^9, 3.7077038510885525`*^9}, 3.7077040180813856`*^9, {
+   3.7077734492354345`*^9, 3.707773479392231*^9}, {3.7078352807603626`*^9, 
+   3.7078352865777826`*^9}},ExpressionUUID->"464f51f6-b0a2-4ccd-863e-\
+d12da723adce"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WHOheaders", "=", 
+   RowBox[{"Association", "[", 
+    RowBox[{"MapThread", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"#1", " ", "->", " ", "#2"}], "}"}], "&"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"Last", "@", 
+           RowBox[{"DeleteCases", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"ToString", "[", 
+                RowBox[{"WHOraw", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", ",", "4"}], "]"}], "]"}], "]"}], ",", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"WHOraw", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", ",", "5"}], "]"}], "]"}], "]"}], ",", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"WHOraw", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", ",", "6"}], "]"}], "]"}], "]"}], ",", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"WHOraw", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", ",", "7"}], "]"}], "]"}], "]"}]}], "}"}], ",", 
+             "\"\<\>\""}], "]"}]}], "&"}], "/@", 
+         RowBox[{"Range", "[", 
+          RowBox[{"12", ",", "226"}], "]"}]}], ",", " ", 
+        RowBox[{"Range", "[", 
+         RowBox[{"2", ",", " ", "216"}], "]"}]}], "}"}]}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.707750172650075*^9, 3.7077502323772078`*^9}, {
+   3.707750748371519*^9, 3.707750757969758*^9}, 3.7077510582310123`*^9, 
+   3.7077511356224413`*^9, {3.707770216066874*^9, 3.7077702517662487`*^9}, {
+   3.7077703840824127`*^9, 3.7077704214890633`*^9}, 3.707772603165276*^9, {
+   3.7077730870260077`*^9, 3.7077731183177958`*^9}, {3.707835288115347*^9, 
+   3.7078353044388433`*^9}, {3.7078353346192045`*^9, 
+   3.707835342949281*^9}},ExpressionUUID->"a8d3f0d7-dd38-4280-be55-\
+49b32a3df4c7"],
+
+Cell[BoxData[
+ RowBox[{"WHOpopulation", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"WHOraw", "[", 
+     RowBox[{"[", 
+      RowBox[{"11", ",", "#"}], "]"}], "]"}], "&"}], "/@", 
+   RowBox[{"Range", "[", 
+    RowBox[{"8", ",", "190"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.7078353474533544`*^9, 3.7078353733054276`*^9}, 
+   3.707839482379003*^9},ExpressionUUID->"0ceb973e-b795-46c9-8fe5-\
+fa9422858cd9"],
+
+Cell[BoxData[
+ RowBox[{"WHOfulldata", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"WHOraw", "[", 
+        RowBox[{"[", 
+         RowBox[{"8", ",", "#"}], "]"}], "]"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"WHOraw", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"12", ";;", "226"}], ",", 
+          RowBox[{"#", "+", "6"}]}], "]"}], "]"}], "/", 
+       RowBox[{"WHOpopulation", "[", 
+        RowBox[{"[", 
+         RowBox[{"#", "-", "1"}], "]"}], "]"}]}]}], "]"}], "&"}], "/@", 
+   RowBox[{"Range", "[", 
+    RowBox[{"2", ",", "184"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.707704108532813*^9, 3.7077041116697145`*^9}, {
+   3.7077041460612555`*^9, 3.7077041768165483`*^9}, {3.7077042263162456`*^9, 
+   3.707704239566161*^9}, {3.7077043140563173`*^9, 3.7077043216453066`*^9}, {
+   3.707704389980071*^9, 3.7077044025836945`*^9}, {3.7077044588282375`*^9, 
+   3.7077044601136107`*^9}, {3.7077045023213253`*^9, 
+   3.7077045286566935`*^9}, {3.707748866061947*^9, 3.707748866796521*^9}, {
+   3.707748931137913*^9, 3.707748931385469*^9}, {3.707749029965438*^9, 
+   3.707749067733385*^9}, 3.707749101874304*^9, {3.7077514132300854`*^9, 
+   3.707751417956448*^9}, {3.707835357282896*^9, 3.707835379477868*^9}, {
+   3.7078392677164936`*^9, 3.707839269971181*^9}, 
+   3.7078395042437453`*^9},ExpressionUUID->"01d7ab17-a8b8-4b9e-8935-\
+8260afc6de1d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WHOcountryrules1", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"#1", "->", 
+      RowBox[{"StringReplace", "[", 
+       RowBox[{"#", ",", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "\"\< and\>\"", ",", "\"\< the\>\"", ",", "\"\<, The\>\"", ",", 
+           "\"\<-\>\"", ",", "\"\< of\>\"", ",", "\"\<People's\>\"", ",", 
+           "\"\<Darussalam\>\"", ",", "\"\<n Federation\>\"", ",", 
+           "\"\<(Bolivarian Republic of)\>\"", ",", 
+           "\"\<(Plurinational State of)\>\"", ",", 
+           "\"\<(Islamic Republic of)\>\"", ",", "\"\<n Arab Republic\>\"", 
+           ",", "\"\<(Federated States of)\>\"", ",", 
+           "\"\<United Republic of\>\"", ",", 
+           "\"\<The former Yugoslav Republic of\>\"", ",", "\"\<, FYR\>\"", 
+           ",", "\"\<, RB\>\"", ",", "\"\<, Rep.\>\"", ",", "\"\<Gaza\>\"", 
+           ",", "\"\<, Fed. Sts.\>\"", ",", "\"\< SAR, China\>\"", ",", 
+           "\"\<America\>\"", ",", "\"\<n Arab Jamahiriya\>\"", ",", 
+           "\"\< \>\""}], "}"}], "\[Rule]", "\"\<\>\""}]}], "]"}]}], "&"}], "/@", 
+    RowBox[{"WHOfulldata", "[", 
+     RowBox[{"[", 
+      RowBox[{
+       RowBox[{"2", ";;"}], ",", "1"}], "]"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.707687526299098*^9, 3.707687552640629*^9}, {
+   3.7076880434485116`*^9, 3.707688046271986*^9}, {3.7076881219709787`*^9, 
+   3.707688125276391*^9}, {3.707688167253264*^9, 3.7076882596681747`*^9}, {
+   3.7076883501093454`*^9, 3.7076884600211706`*^9}, {3.7076884965696297`*^9, 
+   3.7076885578900595`*^9}, {3.7076885989015665`*^9, 
+   3.7076886116615887`*^9}, {3.707688663941883*^9, 3.7076887607976527`*^9}, {
+   3.707688840333879*^9, 3.70768887788068*^9}, {3.707689042366359*^9, 
+   3.7076890605209093`*^9}, {3.7076891023220053`*^9, 3.707689148442237*^9}, {
+   3.707689229686344*^9, 3.707689232857997*^9}, 3.707689292496046*^9, {
+   3.707701825610595*^9, 3.707701859314781*^9}, 3.7077020028728175`*^9, {
+   3.707702083870307*^9, 3.707702093462143*^9}, {3.707702231880971*^9, 
+   3.707702284701044*^9}, {3.7077023330155835`*^9, 3.7077023400361624`*^9}, 
+   3.707702384522335*^9, {3.7077024332694654`*^9, 3.7077024356262846`*^9}, {
+   3.7077026383719893`*^9, 3.7077026446718845`*^9}, {3.707702966364056*^9, 
+   3.707702968895369*^9}, {3.7077030964347196`*^9, 3.707703114638601*^9}, {
+   3.707705067937627*^9, 3.707705075013236*^9}, {3.7077051567037945`*^9, 
+   3.7077051985327406`*^9}, {3.707835364154112*^9, 
+   3.7078353998486404`*^9}},ExpressionUUID->"52dad267-d132-456e-b020-\
+c465b5b62588"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WHOcountryrules2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<CaboVerde\>\"", "\[Rule]", "\"\<CapeVerde\>\""}], ",", 
+     RowBox[{
+     "\"\<C\[CapitalATilde]\.b4ted'Ivoire\>\"", "->", "\"\<IvoryCoast\>\""}], 
+     ",", 
+     RowBox[{"\"\<LaoDemocraticRepublic\>\"", "\[Rule]", "\"\<Laos\>\""}], 
+     ",", 
+     RowBox[{"\"\<Congo\>\"", "\[Rule]", "\"\<RepublicCongo\>\""}], ",", 
+     RowBox[{
+     "\"\<Congo,Dem.Rep.\>\"", "\[Rule]", "\"\<DemocraticRepublicCongo\>\""}],
+      ",", 
+     RowBox[{
+     "\"\<DemocraticRepublicKorea\>\"", "\[Rule]", "\"\<NorthKorea\>\""}], 
+     ",", 
+     RowBox[{"\"\<RepublicMoldova\>\"", "\[Rule]", "\"\<Moldova\>\""}], ",", 
+     RowBox[{"\"\<RepublicKorea\>\"", "\[Rule]", "\"\<SouthKorea\>\""}], ",", 
+     RowBox[{"\"\<VietNam\>\"", "\[Rule]", "\"\<Vietnam\>\""}], ",", 
+     RowBox[{"\"\<StatePalestine\>\"", "\[Rule]", "\"\<WestBank\>\""}], ",", 
+     RowBox[{"\"\<Egypt,ArabRep.\>\"", "\[Rule]", "\"\<Egypt\>\""}], ",", 
+     RowBox[{"\"\<Iran,IslamicRep.\>\"", "\[Rule]", "\"\<Iran\>\""}], ",", 
+     RowBox[{"\"\<LaoPDR\>\"", "\[Rule]", "\"\<Laos\>\""}], ",", 
+     RowBox[{
+     "\"\<VirginIslands(U.S.)\>\"", "\[Rule]", 
+      "\"\<UnitedStatesVirginIslands\>\""}], ",", 
+     RowBox[{
+     "\"\<SintMaarten(Dutchpart)\>\"", "\[Rule]", "\"\<SintMaarten\>\""}], 
+     ",", 
+     RowBox[{"\"\<SlovakRepublic\>\"", "\[Rule]", "\"\<Slovakia\>\""}], ",", 
+     RowBox[{
+     "\"\<St.Martin(Frenchpart)\>\"", "\[Rule]", "\"\<SaintMartin\>\""}], ",", 
+     RowBox[{"\"\<KyrgyzRepublic\>\"", "\[Rule]", "\"\<Kyrgyzstan\>\""}], ",", 
+     RowBox[{"\"\<St.Lucia\>\"", "\[Rule]", "\"\<SaintLucia\>\""}], ",", 
+     RowBox[{"\"\<St.KittsNevis\>\"", "\[Rule]", "\"\<SaintKittsNevis\>\""}], 
+     ",", 
+     RowBox[{
+     "\"\<St.VincentGrenadines\>\"", "\[Rule]", 
+      "\"\<SaintVincentGrenadines\>\""}], ",", 
+     RowBox[{
+     "\"\<Korea,Dem.People\[AHat]\.80\.99sRep.\>\"", "\[Rule]", 
+      "\"\<NorthKorea\>\""}], ",", 
+     RowBox[{"\"\<Korea\>\"", "\[Rule]", "\"\<SouthKorea\>\""}], ",", 
+     RowBox[{"\"\<MacaoSAR,China\>\"", "\[Rule]", "\"\<Macau\>\""}], ",", 
+     RowBox[{"\"\<IsleMan\>\"", "\[Rule]", "\"\<IsleOfMan\>\""}]}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.707688894807478*^9, 3.7076890276587286`*^9}, {
+   3.7076891736419797`*^9, 3.707689184927518*^9}, {3.7076893737379427`*^9, 
+   3.7076893753432446`*^9}, {3.707689437166299*^9, 3.7076894406280975`*^9}, {
+   3.7076896514246855`*^9, 3.707689656823677*^9}, 3.7076909118760557`*^9, {
+   3.7077018638199778`*^9, 3.7077018640219865`*^9}, {3.7077021328154263`*^9, 
+   3.7077022207823486`*^9}, {3.70770234432533*^9, 3.707702354073615*^9}, {
+   3.70770241774349*^9, 3.7077024594088297`*^9}, {3.7077024979453106`*^9, 
+   3.7077025838923683`*^9}, {3.707702666194804*^9, 3.7077027625579987`*^9}, {
+   3.707702858438263*^9, 3.7077028807124414`*^9}, {3.707703020289504*^9, 
+   3.707703071816245*^9}, {3.7077031289102836`*^9, 3.707703138633472*^9}, {
+   3.7077050701415963`*^9, 3.707705070267312*^9}, 3.707705209800852*^9, {
+   3.7077741374907928`*^9, 3.707774148791422*^9}, {3.707835382534761*^9, 
+   3.7078353854673643`*^9}},ExpressionUUID->"5813a43d-99cc-4fd4-ba92-\
+a1e387b3d95e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WHOdata", "=", 
+   RowBox[{"Join", "[", 
+    RowBox[{
+     RowBox[{"{", "WHOheaders", "}"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Flatten", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Entity", "[", 
+            RowBox[{"\"\<Country\>\"", ",", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", 
+             RowBox[{"2", ";;"}], "]"}], "]"}]}], "}"}], "]"}], "&"}], "/@", 
+       RowBox[{"(", 
+        RowBox[{"WHOfulldata", "/.", "WHOcountryrules1"}], ")"}]}], "/.", 
+      RowBox[{"WHOcountryrules2", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"2", ";;"}], ",", "All"}], "]"}], "]"}]}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.7077050258637676`*^9, 3.707705039593113*^9}, {
+   3.7077051175189495`*^9, 3.707705120109974*^9}, 3.7077052597019515`*^9, {
+   3.7077470293773623`*^9, 3.7077470687713675`*^9}, {3.7077471687655635`*^9, 
+   3.7077472406713066`*^9}, {3.70774761192669*^9, 3.7077476580498333`*^9}, {
+   3.707747689651222*^9, 3.7077477052138968`*^9}, 3.707748048482256*^9, 
+   3.7077481625852313`*^9, 3.7077483977161083`*^9, {3.7077488832997866`*^9, 
+   3.7077488887597837`*^9}, 3.707749143790366*^9, 3.707750851072164*^9, 
+   3.7077509896786714`*^9, 3.7077712845409107`*^9, 3.707772598771638*^9, {
+   3.7078354130260415`*^9, 3.7078354400226336`*^9}, 3.7078399481188917`*^9, 
+   3.7078547119961*^9},ExpressionUUID->"2bac32e5-ea57-432d-b0db-09e35e63e1e4"],
+
+Cell[BoxData[
+ RowBox[{"Cases", "[", "\n", "\t\t\t", 
+  RowBox[{
+   RowBox[{"WHOdata", "[", 
+    RowBox[{"[", 
+     RowBox[{
+      RowBox[{"2", ";;"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"WHOheaders", "[", 
+         RowBox[{"[", "str", "]"}], "]"}]}], "}"}]}], "]"}], "]"}], ",", "\n",
+    "\t\t\t", 
+   RowBox[{"{", 
+    RowBox[{"_Entity", ",", "_Real"}], "}"}]}], "\n", "\t\t", "]"}]], "Input",
+ CellChangeTimes->{{3.7077712659388514`*^9, 3.707771271353182*^9}, {
+  3.7078354439653215`*^9, 
+  3.707835449458562*^9}},ExpressionUUID->"c441ffc9-a95d-4b18-8d6e-\
+9bffa4684489"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Manipulate", "[", "\n", "\t", 
+    RowBox[{
+     RowBox[{"GeoRegionValuePlot", "[", "\n", "\t\t", "\n", "\t\t\t", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"WHOdata", "[", 
+          RowBox[{"[", 
+           RowBox[{"#", ",", "1"}], "]"}], "]"}], "\[Rule]", 
+         RowBox[{"WHOdata", "[", 
+          RowBox[{"[", 
+           RowBox[{"#", ",", 
+            RowBox[{"WHOheaders", "[", 
+             RowBox[{"[", "Cause", "]"}], "]"}]}], "]"}], "]"}]}], "&"}], "/@", 
+       RowBox[{"Range", "[", 
+        RowBox[{"2", ",", 
+         RowBox[{"Length", "[", 
+          RowBox[{"WHOdata", "-", "1"}], "]"}]}], "\n", "\t\t\t\t\t", "\n", 
+        "\t", "]"}]}], "]"}], ",", "\n", "\t", 
+     RowBox[{"{", 
+      RowBox[{"Cause", ",", 
+       RowBox[{
+        RowBox[{"Normal", "[", "WHOheaders", "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "}"}]}], "\n", "]"}], 
+   ";"}], "\[IndentingNewLine]"}]], "Code",
+ CellChangeTimes->{{3.707705261307082*^9, 3.707705295934863*^9}, {
+   3.707747693071804*^9, 3.7077477491230993`*^9}, {3.7077477877463193`*^9, 
+   3.707747788596204*^9}, {3.707747842805493*^9, 3.7077479268902054`*^9}, {
+   3.707747996121384*^9, 3.707748000681283*^9}, 3.707748136064597*^9, {
+   3.707748168319809*^9, 3.7077482685063624`*^9}, {3.7077483090872593`*^9, 
+   3.7077483435857315`*^9}, {3.707748470267623*^9, 3.7077484721255894`*^9}, {
+   3.7077485641145563`*^9, 3.70774856430897*^9}, {3.707748640481119*^9, 
+   3.7077486407944255`*^9}, {3.7077487133232517`*^9, 
+   3.7077487290972853`*^9}, {3.707748763268556*^9, 3.707748785281187*^9}, {
+   3.707750249753998*^9, 3.7077502542826905`*^9}, {3.7077504179408894`*^9, 
+   3.7077504424571004`*^9}, {3.707750538397851*^9, 3.7077505665844355`*^9}, {
+   3.7077506599797688`*^9, 3.7077506612718315`*^9}, {3.707750731556625*^9, 
+   3.7077507328262386`*^9}, {3.7077510970574875`*^9, 3.707751098939783*^9}, {
+   3.7077511579933257`*^9, 3.7077511613772864`*^9}, {3.7077512080140877`*^9, 
+   3.7077512290389423`*^9}, {3.7077702602617006`*^9, 
+   3.7077702812370396`*^9}, {3.707770430751865*^9, 3.7077704334536505`*^9}, {
+   3.7077731978933363`*^9, 3.7077732054674015`*^9}, {3.7077737599240727`*^9, 
+   3.7077737663902044`*^9}, {3.7077919524941483`*^9, 
+   3.7077919539194527`*^9}, {3.7077919977727776`*^9, 
+   3.7077920077225676`*^9}, {3.707792189247177*^9, 3.707792192611745*^9}, {
+   3.707792416260956*^9, 3.707792436716196*^9}, {3.7077925312495985`*^9, 
+   3.70779253850861*^9}, {3.707835452211913*^9, 3.7078354677858677`*^9}, {
+   3.707839328808302*^9, 3.707839467754874*^9}, {3.707839561960251*^9, 
+   3.7078395630162573`*^9}, 
+   3.707842415836358*^9},ExpressionUUID->"95e9edc7-5d1a-419e-993e-\
+aa2ee2d3f1e0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"RGBColor", "[", 
+      RowBox[{
+       RowBox[{"#", "*", "10"}], ",", "0", ",", "0"}], "]"}], "&"}], ",", 
+    "hoo2", ",", 
+    RowBox[{"{", "2", "}"}]}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.7077936429409857`*^9, 3.70779369087134*^9}, {
+   3.707793746594344*^9, 3.7077937567352495`*^9}, 
+   3.707793988773802*^9},ExpressionUUID->"28c8730c-7bc9-462c-a7c8-\
+ab9cb7165310"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"RGBColor", "[", 
+    RowBox[{
+     RowBox[{"#", "/", "4"}], ",", "0", ",", "0"}], "]"}], "&"}], "@@@", 
+  RowBox[{"Map", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3", ",", "4"}], "}"}]}], "}"}]}]}]], "Input",
+ CellChangeTimes->{{3.7077932451772904`*^9, 3.707793282221097*^9}, {
+  3.7077934829122095`*^9, 3.7077935435159826`*^9}, {3.7077936284030128`*^9, 
+  3.707793631328479*^9}},ExpressionUUID->"eafffea3-f772-4139-9d3e-\
+9eb839fa3341"],
+
+Cell[BoxData["hoo2"], "Input",
+ CellChangeTimes->{{3.707793741002116*^9, 
+  3.7077937413160267`*^9}},ExpressionUUID->"08f75000-f619-48ad-99f7-\
+b676871f9f0a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"GeoGraphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"EdgeForm", "[", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Thin", ",", "Black"}], "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"GeoStyling", "[", "#2", "]"}], ",", 
+           RowBox[{"Tooltip", "[", 
+            RowBox[{
+             RowBox[{"Polygon", "[", "#1", "]"}], ",", 
+             RowBox[{"#1", "[", 
+              RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "}"}], "&"}], "@@@", 
+        RowBox[{"Cases", "[", "\n", "\t\t\t", 
+         RowBox[{
+          RowBox[{"hoo2", "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"2", ";;"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", 
+               RowBox[{"headers", "[", 
+                RowBox[{"[", "Cause", "]"}], "]"}]}], "}"}]}], "]"}], "]"}], 
+          ",", "\n", "\t\t\t", 
+          RowBox[{"{", 
+           RowBox[{"_Entity", ",", "_Real"}], "}"}]}], "]"}]}]}], "}"}], 
+     "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"Cause", ",", 
+      RowBox[{
+       RowBox[{"Normal", "[", "headers", "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "}"}]}], "\n", "]"}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.7077927773050137`*^9, 3.7077928019713726`*^9}, {
+   3.707792944726321*^9, 3.7077929672357945`*^9}, {3.707793320526211*^9, 
+   3.707793337000853*^9}, {3.707793394530843*^9, 3.7077933961653233`*^9}, {
+   3.7077934283657055`*^9, 3.707793432550978*^9}, {3.7077937011811237`*^9, 
+   3.7077937341173697`*^9}, 
+   3.7078426471766567`*^9},ExpressionUUID->"674da115-81fc-4317-a86d-\
+bdc801089fce"],
+
+Cell[CellGroupData[{
+
+Cell["State of World Children (UNICEF)", "Subsection",
+ CellChangeTimes->{{3.7077736453025184`*^9, 
+  3.707773652032378*^9}},ExpressionUUID->"071a9a47-e285-4cb6-98a1-\
+ce8b05cbccbb"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SOWCraw", "=", 
+   RowBox[{
+   "Import", "[", 
+    "\"\<C:\\\\Users\\\\Ben\\\\Documents\\\\wolfram\\\\Wolfram-Summer-School-\
+2017-Project\\\\Data Sets\\\\SOWC2014l.xlsx\>\"", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7076807575234985`*^9, 3.707680769270521*^9}, 
+   3.707703423309265*^9, {3.707773592203411*^9, 3.7077735923353777`*^9}, {
+   3.707773654055904*^9, 3.707773654464821*^9}, {3.7078354889645033`*^9, 
+   3.7078354959914103`*^9}},ExpressionUUID->"946e7d67-7b38-4d53-818a-\
+5e31c0ac2eb6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CanonicalName", "[", 
+   RowBox[{"CountryData", "[", "]"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.7077020478759413`*^9, 3.707702063402175*^9}, 
+   3.7077034137516932`*^9},ExpressionUUID->"c59c84a7-401b-4c39-9063-\
+c0048e43f5f7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SOWCfulldata", "=", 
+   RowBox[{"data3", "[", 
+    RowBox[{"[", 
+     RowBox[{"3", ",", 
+      RowBox[{"18", ";;", "211"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "2", ",", "5", ",", "6", ",", "7", ",", "8", ",", "9", ",", "10", ",", 
+        "11", ",", "12", ",", "13", ",", "14", ",", "15", ",", "16", ",", 
+        "17", ",", "18", ",", "19", ",", "20"}], "}"}]}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.7076821859923897`*^9, 3.70768224241171*^9}, {
+   3.7076822753785057`*^9, 3.707682291778658*^9}, {3.7076824454187603`*^9, 
+   3.707682447843299*^9}, {3.70768323371482*^9, 3.707683248811788*^9}, {
+   3.7076833154257708`*^9, 3.7076833230678487`*^9}, 3.7076863583435044`*^9, 
+   3.7076872127638807`*^9, 3.7076875608424296`*^9, 3.707688802556608*^9, 
+   3.707701351369875*^9, {3.7077056914971766`*^9, 3.7077057177217717`*^9}, {
+   3.707835500827071*^9, 
+   3.7078355035387306`*^9}},ExpressionUUID->"45621243-774e-487e-b115-\
+28ed4069f70f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SOWCheaders", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Country\>\"", ",", "\"\<a\>\"", ",", "\"\<b\>\"", ",", "\"\<c\>\"", 
+     ",", "\"\<d\>\"", ",", "\"\<e\>\"", ",", "\"\<f\>\"", ",", "\"\<g\>\"", 
+     ",", "\"\<h\>\"", ",", "\"\<i\>\"", ",", "\"\<j\>\"", ",", "\"\<k\>\"", 
+     ",", "\"\<l\>\"", ",", "\"\<m\>\"", ",", "\"\<n\>\"", ",", "\"\<o\>\"", 
+     ",", "\"\<p\>\""}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7076828894376802`*^9, 3.7076829471197653`*^9}, 
+   3.707687600461997*^9, {3.7077045352149935`*^9, 3.7077045354809265`*^9}, {
+   3.7078355062747154`*^9, 
+   3.707835507826536*^9}},ExpressionUUID->"b7d15bdc-2bfe-4d98-ae75-\
+008c9c54d424"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Length", "[", 
+    RowBox[{"Union", "[", "#", "]"}], "]"}], "&"}], "/@", 
+  RowBox[{"Transpose", "[", "SOWCfulldata", "]"}]}]], "Input",
+ CellChangeTimes->{{3.7076822975266013`*^9, 3.7076823249601355`*^9}, {
+  3.707682359754058*^9, 3.707682436567771*^9}, {3.7078355116932807`*^9, 
+  3.7078355135601883`*^9}},ExpressionUUID->"45b7274a-54d8-459e-bda5-\
+e5e72ef33bde"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SOWCcountryrules1", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"#1", "->", 
+      RowBox[{"StringReplace", "[", 
+       RowBox[{"#", ",", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "\"\< and\>\"", ",", "\"\< the\>\"", ",", "\"\<-\>\"", ",", 
+           "\"\< of\>\"", ",", "\"\<People's\>\"", ",", "\"\<Darussalam\>\"", 
+           ",", "\"\<n Federation\>\"", ",", 
+           "\"\<(Bolivarian Republic of)\>\"", ",", 
+           "\"\<(Plurinational State of)\>\"", ",", 
+           "\"\<(Islamic Republic of)\>\"", ",", "\"\<n Arab Republic\>\"", 
+           ",", "\"\<(Federated States of)\>\"", ",", 
+           "\"\<United Republic of\>\"", ",", 
+           "\"\<The former Yugoslav Republic of\>\"", ",", "\"\< \>\""}], 
+          "}"}], "\[Rule]", "\"\<\>\""}]}], "]"}]}], "&"}], "/@", 
+    RowBox[{"foo", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "1"}], "]"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.707687526299098*^9, 3.707687552640629*^9}, {
+   3.7076880434485116`*^9, 3.707688046271986*^9}, {3.7076881219709787`*^9, 
+   3.707688125276391*^9}, {3.707688167253264*^9, 3.7076882596681747`*^9}, {
+   3.7076883501093454`*^9, 3.7076884600211706`*^9}, {3.7076884965696297`*^9, 
+   3.7076885578900595`*^9}, {3.7076885989015665`*^9, 
+   3.7076886116615887`*^9}, {3.707688663941883*^9, 3.7076887607976527`*^9}, {
+   3.707688840333879*^9, 3.70768887788068*^9}, {3.707689042366359*^9, 
+   3.7076890605209093`*^9}, {3.7076891023220053`*^9, 3.707689148442237*^9}, {
+   3.707689229686344*^9, 3.707689232857997*^9}, 3.707689292496046*^9, {
+   3.7078355157285247`*^9, 
+   3.707835520731504*^9}},ExpressionUUID->"87278ac5-5694-45fa-91b3-\
+539c7bcfa5b6"],
+
+Cell[BoxData[
+ RowBox[{"SOWCcountryrules2", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"\"\<CaboVerde\>\"", "\[Rule]", "\"\<CapeVerde\>\""}], ",", 
+    RowBox[{"\"\<C\[OHat]ted'Ivoire\>\"", "->", "\"\<IvoryCoast\>\""}], ",", 
+    RowBox[{"\"\<LaoDemocraticRepublic\>\"", "\[Rule]", "\"\<Laos\>\""}], ",", 
+    RowBox[{"\"\<Congo\>\"", "\[Rule]", "\"\<DemocraticRepublicCongo\>\""}], 
+    ",", 
+    RowBox[{
+    "\"\<DemocraticRepublicKorea\>\"", "\[Rule]", "\"\<NorthKorea\>\""}], ",", 
+    RowBox[{"\"\<RepublicMoldova\>\"", "\[Rule]", "\"\<Moldova\>\""}], ",", 
+    RowBox[{"\"\<RepublicKorea\>\"", "\[Rule]", "\"\<SouthKorea\>\""}], ",", 
+    RowBox[{"\"\<VietNam\>\"", "\[Rule]", "\"\<Vietnam\>\""}], ",", 
+    RowBox[{"\"\<StatePalestine\>\"", "\[Rule]", "\"\<WestBank\>\""}]}], 
+   "}"}]}]], "Input",
+ CellChangeTimes->{{3.707688894807478*^9, 3.7076890276587286`*^9}, {
+   3.7076891736419797`*^9, 3.707689184927518*^9}, {3.7076893737379427`*^9, 
+   3.7076893753432446`*^9}, {3.707689437166299*^9, 3.7076894406280975`*^9}, {
+   3.7076896514246855`*^9, 3.707689656823677*^9}, 3.7076909118760557`*^9, {
+   3.7077029998747096`*^9, 3.707703006613697*^9}, {3.707835524235811*^9, 
+   3.707835526883292*^9}},ExpressionUUID->"cbbac1ce-1090-43d2-a65c-\
+438bde09a223"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SOWCdata", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Entity", "[", 
+        RowBox[{"\"\<Country\>\"", ",", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ",", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "&"}], "/@", 
+    RowBox[{
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"{", "SOWCheaders", "}"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"SOWCfulldata", "/.", "SOWCcountryrules1"}], ")"}], "/.", 
+        "SOWCcountryrules2"}]}], "]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{
+       RowBox[{"2", ";;"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "6"}], "}"}]}], "]"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7076830549402666`*^9, 3.7076830559377265`*^9}, {
+   3.707683087290062*^9, 3.7076831921760445`*^9}, {3.707683378618019*^9, 
+   3.7076833847645135`*^9}, 3.7076863078437357`*^9, {3.707690596671564*^9, 
+   3.707690636814319*^9}, {3.7076906890366535`*^9, 3.7076907766962595`*^9}, {
+   3.707690853100855*^9, 3.7076908589100513`*^9}, 3.707704062116764*^9, {
+   3.707835536111268*^9, 
+   3.707835567677556*^9}},ExpressionUUID->"82a35937-dca1-4dd2-860c-\
+d73b3024d89a"],
+
+Cell[BoxData[
+ RowBox[{"\"\<Population\>\"", "/.", "mybigdataset"}]], "Input",
+ CellChangeTimes->{{3.707684141576649*^9, 
+  3.7076841589334946`*^9}},ExpressionUUID->"0fffa4c5-8c4d-4cee-8383-\
+c461a87648b9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Association", "[", 
+   RowBox[{"Rule", "@@@", "foo3"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.7076833675441275`*^9, 3.707683416550931*^9}, 
+   3.707686069529766*^9},ExpressionUUID->"91c273e0-a675-4ba9-b208-\
+4f49fade9d3c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cleanSOWCdata", "=", 
+   RowBox[{"Cases", "[", 
+    RowBox[{"SOWCdata", ",", 
+     RowBox[{"{", 
+      RowBox[{"_Entity", ",", "_Real"}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7076835296013794`*^9, 3.7076836571536407`*^9}, {
+   3.7076837791821337`*^9, 3.707683784932178*^9}, 3.7077040577976737`*^9, {
+   3.7077479804610715`*^9, 3.7077479899708705`*^9}, {3.7078355836204033`*^9, 
+   3.707835594086924*^9}},ExpressionUUID->"acdef8e0-4719-4e65-b238-\
+9e3ff19bbe1c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GeoRegionValuePlot", "[", 
+   RowBox[{"cleanSOWCdata", ",", 
+    RowBox[{"PlotLegends", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"ColorFunction", "->", "\"\<TemperatureMap\>\""}], ",", 
+    RowBox[{"LabelStyle", "\[Rule]", "Automatic"}]}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.7076838132702694`*^9, 3.70768381641838*^9}, {
+   3.7076838521629553`*^9, 3.7076838631686673`*^9}, {3.7076897476560965`*^9, 
+   3.7076897531569796`*^9}, {3.7076898028955956`*^9, 
+   3.7076898104688034`*^9}, {3.7076898480282564`*^9, 3.7076898569551*^9}, {
+   3.7076898937753057`*^9, 3.7076899283734035`*^9}, {3.7076899656515274`*^9, 
+   3.707689976605997*^9}, {3.7076904591372576`*^9, 3.7076904652377443`*^9}, 
+   3.707690496124461*^9, {3.7076909409489346`*^9, 3.707690942051833*^9}, {
+   3.707835597302494*^9, 3.7078355996278114`*^9}, 
+   3.707845085610381*^9},ExpressionUUID->"86d270a7-6981-4303-93e3-\
+9439d8257756"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["World Association of NGOS", "Subsection",
+ CellChangeTimes->{{3.707777516046686*^9, 
+  3.7077775251574135`*^9}},ExpressionUUID->"f1912f42-c434-4e43-b083-\
+44254107981c"],
+
+Cell[BoxData[
+ RowBox[{"raw1", "[", 
+  RowBox[{"[", 
+   RowBox[{"5", ",", "2", ",", "1", ",", "1", ",", "1", ",", "2"}], "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.7077805846865005`*^9, 3.7077806181123433`*^9}, {
+  3.7077810006030445`*^9, 
+  3.707781028838892*^9}},ExpressionUUID->"5d17bc99-3651-4451-8a5a-\
+7836848bd0a4"],
+
+Cell[BoxData[
+ RowBox[{"raw1", "[", 
+  RowBox[{"[", 
+   RowBox[{"9", ",", "2", ",", "1", ",", "1", ",", "2", ",", "2"}], "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.7077806254026384`*^9, 3.7077806255863867`*^9}, {
+  3.707780837732238*^9, 
+  3.7077808499896393`*^9}},ExpressionUUID->"16673e3f-2b87-431e-b78f-\
+011b8fc3bd39"],
+
+Cell[BoxData[
+ RowBox[{"Put", "[", 
+  RowBox[{"\"\< \>\"", ","}], "]"}]], "Input",
+ CellChangeTimes->{{3.7078431210060973`*^9, 
+  3.707843131328647*^9}},ExpressionUUID->"07652cc9-bef2-4e1d-b174-\
+ee6e121fea70"],
+
+Cell[BoxData["DumpSave"], "Input",
+ CellChangeTimes->{{3.7078431637604065`*^9, 
+  3.7078431675417824`*^9}},ExpressionUUID->"aff7e8dc-84a2-46cc-8774-\
+d99df890fbf6"],
+
+Cell[BoxData["URLDownload"], "Input",
+ CellChangeTimes->{{3.707843203859463*^9, 
+  3.7078432068149157`*^9}},ExpressionUUID->"e15c8aec-2216-4735-b390-\
+74fbacb10321"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"Import", "[", 
+    RowBox[{
+     RowBox[{"\"\<http://wango.org/ORG_details.aspx?inline=1&orgID=\>\"", "<>", 
+      RowBox[{"ToString", "[", "6", "]"}]}], ",", "\"\<XMLObject\>\""}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.707782932845431*^9, 3.707783051468557*^9}, {
+  3.707783104359544*^9, 3.7077831422854795`*^9}, {3.707783368922229*^9, 
+  3.7077833700789413`*^9}},ExpressionUUID->"ca0413d2-1293-4af1-922d-\
+aa12177ed668"],
+
+Cell[BoxData[
+ RowBox[{"a", "[", 
+  RowBox[{"[", 
+   RowBox[{
+   "2", ",", "3", ",", "2", ",", "3", ",", "2", ",", "3", ",", "1", ",", "3", 
+    ",", "1", ",", "3", ",", "4", ",", "3", ",", "1", ",", "3", ",", "3", ",",
+     "3", ",", "1", ",", "3", ",", "1", ",", "3", ",", "2", ",", "3", ",", 
+    "2", ",", "3", ",", "2", ",", "3"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.7077830596245394`*^9, 3.7077830995449963`*^9}, {
+  3.707783145688102*^9, 3.7077832166477613`*^9}, {3.7077833043862143`*^9, 
+  3.7077833094412737`*^9}, {3.7077833509684296`*^9, 3.7077833553770056`*^9}, {
+  3.707783397690682*^9, 
+  3.7077834659498167`*^9}},ExpressionUUID->"bd40c6b6-f62d-47aa-a97f-\
+0bd3aff20100"],
+
+Cell[BoxData[
+ RowBox[{"a", "[", 
+  RowBox[{"[", 
+   RowBox[{
+   "2", ",", "3", ",", "2", ",", "3", ",", "2", ",", "3", ",", "1", ",", "3", 
+    ",", "1", ",", "3", ",", "4", ",", "3", ",", "1", ",", "3", ",", "3", ",",
+     "3", ",", "1", ",", "3", ",", "1", ",", "3", ",", "2", ",", "3", ",", 
+    "1", ",", "3", ",", "2", ",", "3"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.707783473509615*^9, 
+  3.7077834739347773`*^9}},ExpressionUUID->"0070716a-bcde-4164-a39d-\
+cd07b1d03a6e"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{
+  3.7077830940142574`*^9},ExpressionUUID->"1b829254-ecd6-44fb-a957-\
+c6e8900d2733"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NGOraw", " ", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{
+       RowBox[{"\"\<http://wango.org/ORG_details.aspx?inline=1&orgID=\>\"", "<>", 
+        RowBox[{"ToString", "[", "#", "]"}]}], ",", "\"\<XMLObject\>\""}], 
+      "]"}], "&"}], "/@", 
+    RowBox[{"Range", "[", 
+     RowBox[{"1", ",", "10"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7077793290761127`*^9, 3.707779340040921*^9}, {
+   3.7077794279056807`*^9, 3.707779438033395*^9}, 3.7077795528024383`*^9, {
+   3.7077797783270426`*^9, 3.7077798356726904`*^9}, {3.7077799324380336`*^9, 
+   3.7077799742956266`*^9}, {3.7077800204986253`*^9, 3.707780021264559*^9}, {
+   3.707780099872529*^9, 3.7077801408397183`*^9}, {3.7077805478968186`*^9, 
+   3.7077805782061715`*^9}, {3.7077807656301174`*^9, 
+   3.7077808210250998`*^9}, {3.7077809083571568`*^9, 
+   3.7077809143157854`*^9}, {3.7077809653136225`*^9, 
+   3.7077809655856886`*^9}, {3.707781651054449*^9, 3.707781651642535*^9}, {
+   3.707781897752336*^9, 3.7077818978706064`*^9}, 3.707782160433926*^9, {
+   3.707783246667444*^9, 3.7077832616865845`*^9}, {3.707835620007284*^9, 
+   3.7078356314594*^9}},ExpressionUUID->"99943de0-34d3-49b1-a9f3-\
+e2627090dd91"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NGOlist", "=", 
+   RowBox[{"Cases", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", 
+           RowBox[{
+           "2", ",", "3", ",", "2", ",", "3", ",", "2", ",", "3", ",", "1", 
+            ",", "3", ",", "1", ",", "3", ",", "2", ",", "3"}], "]"}], "]"}], 
+         ",", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", 
+           RowBox[{
+           "2", ",", "3", ",", "2", ",", "3", ",", "2", ",", "3", ",", "1", 
+            ",", "3", ",", "1", ",", "3", ",", "4", ",", "3", ",", "1", ",", 
+            "3", ",", "2", ",", "3", ",", "1", ",", "3", ",", "1", ",", "3", 
+            ",", "2", ",", "3", ",", "1", ",", "3", "\[IndentingNewLine]", 
+            ",", "2", ",", "3"}], "]"}], "]"}], ",", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", 
+           RowBox[{
+           "2", ",", "3", ",", "2", ",", "3", ",", "2", ",", "3", ",", "1", 
+            ",", "3", ",", "1", ",", "3", ",", "4", ",", "3", ",", "1", ",", 
+            "3", ",", "2", ",", "3", ",", "1", ",", "3", ",", "1", ",", "3", 
+            ",", "2", ",", "3", ",", "2", ",", "3", ",", "2", ",", "3"}], 
+           "]"}], "]"}], ",", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", 
+           RowBox[{
+           "2", ",", "3", ",", "2", ",", "3", ",", "2", ",", "3", ",", "1", 
+            ",", "3", ",", "1", ",", "3", ",", "4", ",", "3", ",", "1", ",", 
+            "3", ",", "3", ",", "3", ",", "1", ",", "3", ",", "1", ",", "3", 
+            ",", "2", ",", "3", ",", "1", ",", "3", ",", "2", ",", "3"}], 
+           "]"}], "]"}], ",", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", 
+           RowBox[{
+           "2", ",", "3", ",", "2", ",", "3", ",", "2", ",", "3", ",", "1", 
+            ",", "3", ",", "1", ",", "3", ",", "4", ",", "3", ",", "1", ",", 
+            "3", ",", "3", ",", "3", ",", "1", ",", "3", ",", "1", ",", "3", 
+            ",", "2", ",", "3", ",", "2", ",", "3", ",", "2", ",", "3"}], 
+           "]"}], "]"}]}], "}"}], "&"}], "/@", "NGOraw"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"_List", ",", "_", ",", "_", ",", "_", ",", "_"}], "}"}]}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7077781955216866`*^9, 3.7077783135236826`*^9}, {
+   3.7077783890949354`*^9, 3.707778395946374*^9}, {3.707779051582874*^9, 
+   3.7077790624992557`*^9}, {3.7077796981498375`*^9, 3.707779763390053*^9}, {
+   3.707779841983365*^9, 3.707779921159845*^9}, {3.7077801459264708`*^9, 
+   3.7077802020526276`*^9}, {3.707780434745326*^9, 3.7077804978484693`*^9}, {
+   3.707780639166004*^9, 3.707780649991803*^9}, 3.7077806925650887`*^9, {
+   3.707780785873932*^9, 3.707780791426469*^9}, {3.7077809397718735`*^9, 
+   3.707780985309026*^9}, 3.707782164728826*^9, {3.70778322247208*^9, 
+   3.707783323314396*^9}, {3.7077833590866947`*^9, 3.7077833593209248`*^9}, {
+   3.707784163961914*^9, 3.7077842481793833`*^9}, {3.707785054165037*^9, 
+   3.707785115711548*^9}, {3.70778533474695*^9, 3.7077853578931265`*^9}, {
+   3.7078425611802893`*^9, 
+   3.7078426127020273`*^9}},ExpressionUUID->"75f9e26f-f16b-42ce-9c26-\
+507a496e18a6"],
+
+Cell[BoxData[
+ RowBox[{"a", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"WolframAlpha", "[", 
+      RowBox[{
+       RowBox[{"ToString", "[", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", "\"\<Result\>\""}], 
+      "]"}], "\[Rule]", 
+     RowBox[{"#", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "&"}], "/@", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Cases", "[", 
+       RowBox[{"#", ",", "_List"}], "]"}], "&"}], "/@", "NGOlist"}], 
+    ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.707786555060277*^9, 3.7077865567509623`*^9}, {
+  3.707786828561061*^9, 3.707786828721429*^9}, {3.7077869422863846`*^9, 
+  3.707786943745695*^9}, {3.7077869976247177`*^9, 3.7077870104630527`*^9}, {
+  3.707787091477208*^9, 3.7077870969377975`*^9}, {3.7077874394664803`*^9, 
+  3.7077874531676664`*^9}, {3.7077914808272934`*^9, 
+  3.7077915348714046`*^9}},ExpressionUUID->"393e1fa5-c291-40e4-9d24-\
+1cb19998b628"],
+
+Cell[BoxData[
+ RowBox[{"GeoRegionValuePlot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"WolframAlpha", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "<>", "\"\<, \>\"", "<>", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "3", "]"}], "]"}]}], ",", "\"\<Result\>\""}], "]"}], 
+      "\[Rule]", 
+      RowBox[{"#", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "&"}], "/@", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Cases", "[", 
+        RowBox[{"#", ",", "_List"}], "]"}], "&"}], "/@", "NGOlist"}], ")"}]}],
+    ",", 
+   RowBox[{"GeoLabels", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQBmIQfXJmCwPHgteOk4qfMoLopXtj2EB0tkQ9O4iOSUnh
+BtGaNxaA6e6ULQIgOmAyiySI/jE7VxFEi+1N0gXRIdNem4PonMXWFiB62dql
+diC6qUrcHmzuUpckEJ0SOTcdbG/XnGIQvaJtViOY/rVYlAtIn6qfIwai5RhM
+ZUD0jqApYPppR7oSiF7L8A5MX7lxzQhEPyibbgKit+5wsAbR8YW/XUD09qlB
+2SB69S3TPLB68QNFIPrFruBiEF38eG8NiJ6TYVcLok+qrG8D2yf5vgNE17zY
+twBEh+yMXAiiAWtij0U=
+  "],ExpressionUUID->"a5d83169-798b-4eef-8306-b2957e64f077"],
+
+Cell[BoxData[
+ RowBox[{"Cases", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\"\<a\>\"", ",", "\"\<b\>\""}], "}"}], ",", 
+   RowBox[{"\"\<b\>\"", "|", "\"\<a\>\""}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7077849483550167`*^9, 
+  3.707784964231075*^9}},ExpressionUUID->"ad2c3735-3995-458d-b868-\
+5cd9145361d2"],
+
+Cell[BoxData[
+ RowBox[{"GeoRegionValue", "[", 
+  RowBox[{"a", "[", 
+   RowBox[{"[", 
+    RowBox[{",", 
+     RowBox[{"GeoLabels", "\[Rule]", "True"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.7077868218116627`*^9, 
+  3.7077868591672497`*^9}},ExpressionUUID->"dc19489d-01ed-4374-9a50-\
+f172a434d740"],
+
+Cell[BoxData[
+ RowBox[{"Entity", "[", 
+  RowBox[{"\"\<City\>\"", ",", 
+   RowBox[{"{", 
+    RowBox[{"\"\<Phnum Pehn\>\"", ",", " ", "\"\<Cambodia\>\""}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.7078427476869144`*^9, 
+  3.7078427767616143`*^9}},ExpressionUUID->"68640e6b-745a-4446-8728-\
+eec45831ba7e"],
+
+Cell[BoxData[
+ RowBox[{"CanonicalName", "[", 
+  NamespaceBox["LinguisticAssistant",
+   DynamicModuleBox[{Typeset`query$$ = "Phnum Pehn", Typeset`boxes$$ = "None",
+     Typeset`allassumptions$$ = {}, Typeset`assumptions$$ = {}, 
+    Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {
+    "Online" -> True, "Allowed" -> True, "mparse.jsp" -> 
+     0.3982611`7.05171288243008, "$TimedOut" -> 4.9027637`8.141985955422728, 
+     "Messages" -> {}}}, 
+    DynamicBox[ToBoxes[
+      AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, 
+       Dynamic[Typeset`query$$], 
+       Dynamic[Typeset`boxes$$], 
+       Dynamic[Typeset`allassumptions$$], 
+       Dynamic[Typeset`assumptions$$], 
+       Dynamic[Typeset`open$$], 
+       Dynamic[Typeset`querystate$$]], StandardForm],
+     ImageSizeCache->{147., {7., 20.}},
+     TrackedSymbols:>{
+      Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, 
+       Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+    DynamicModuleValues:>{},
+    UndoTrackedVariables:>{Typeset`open$$}],
+   BaseStyle->{"Deploy"},
+   DeleteWithContents->True,
+   Editable->False,
+   SelectWithContents->True]}]], "Input",
+ CellChangeTimes->{{3.7078427781594934`*^9, 
+  3.707842782183614*^9}},ExpressionUUID->"beb6a61a-e35f-47fc-b678-\
+42e9fc79bd53"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Interpreter", "[", "\"\<City\>\"", "]"}], "[", 
+  RowBox[{"{", 
+   RowBox[{"\"\<Phnum Penh, Cambodia\>\"", ",", "\"\<N'Djamena, Chad\>\""}], 
+   "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.707842802915805*^9, 
+  3.707842974778958*^9}},ExpressionUUID->"647c0139-1bde-4df7-ba2a-\
+263a0b766b3f"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1520, 781},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+Magnification:>1.2 Inherited,
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (March 13, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 162, 3, 58, "Subsection", "ExpressionUUID" -> \
+"d52afb3c-b9a1-4895-9046-6608eea1f0ed"],
+Cell[745, 27, 482, 12, 37, "Input", "ExpressionUUID" -> \
+"fe4d4c91-f06f-42ff-82c5-5bf934dfcdf0"],
+Cell[1230, 41, 360, 10, 37, "Input", "ExpressionUUID" -> \
+"86b568a0-9d56-47aa-9660-94a79011c9d0"],
+Cell[1593, 53, 93, 0, 37, "Input", "ExpressionUUID" -> \
+"9f4c369b-08fb-4abb-ba72-29b7d1ab7d5e"],
+Cell[1689, 55, 476, 14, 37, "Input", "ExpressionUUID" -> \
+"44098477-d33a-4d93-bd58-30e520fbe1fe"],
+Cell[2168, 71, 716, 19, 37, "Input", "ExpressionUUID" -> \
+"06903ed8-9094-4dd6-a105-5ac8aaff7caa"],
+Cell[2887, 92, 534, 12, 37, "Input", "ExpressionUUID" -> \
+"5d52fa77-ac32-49c2-ab26-c8e06535e3c1"],
+Cell[3424, 106, 192, 4, 37, "Input", "ExpressionUUID" -> \
+"b554b73d-3e81-4411-b1bc-8bef6e28a162"],
+Cell[3619, 112, 157, 3, 35, "Text", "ExpressionUUID" -> \
+"d5c9fb28-e4ec-4ba1-8d35-a72c3d5f2153"],
+Cell[3779, 117, 949, 24, 37, "Input", "ExpressionUUID" -> \
+"6ecb2755-66a4-4c44-9e3c-c39f4d1d9e84"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4765, 146, 221, 3, 72, "Section", "ExpressionUUID" -> \
+"873e6ba9-d3b1-471f-847e-e6c0e33aff44"],
+Cell[4989, 151, 642, 13, 37, "Input", "ExpressionUUID" -> \
+"be4e1f99-a49a-4cfd-ad7b-0c465f377188"],
+Cell[5634, 166, 1503, 35, 37, "Input", "ExpressionUUID" -> \
+"b03a6a84-f563-4ef7-ad05-44b8dd71f015"],
+Cell[7140, 203, 667, 18, 37, "Input", "ExpressionUUID" -> \
+"7770350e-a47f-45d5-967d-ff73b2ba750a"],
+Cell[7810, 223, 2503, 45, 110, "Input", "ExpressionUUID" -> \
+"4cea12c5-1866-452a-899c-a3058e666b72"],
+Cell[10316, 270, 3139, 58, 182, "Input", "ExpressionUUID" -> \
+"da8d60bb-ee15-40ae-9746-30b4bbfab1f5"],
+Cell[13458, 330, 2245, 49, 62, "Input", "ExpressionUUID" -> \
+"fe0271a2-62d2-4471-b433-ab7d8d82dac4"],
+Cell[15706, 381, 504, 14, 37, "Input", "ExpressionUUID" -> \
+"f44bb678-f32d-43f4-af48-bbdcdda3a355"],
+Cell[16213, 397, 687, 11, 37, "Input", "ExpressionUUID" -> \
+"53fda377-92d3-4faf-8827-4d4025ff9ec1"],
+Cell[16903, 410, 816, 21, 37, "Input", "ExpressionUUID" -> \
+"225fe620-b850-4171-959b-80394229d7b6"],
+Cell[17722, 433, 314, 7, 37, "Input", "ExpressionUUID" -> \
+"faaadb7b-326a-4a3f-b8df-95d1f2fdb681"],
+Cell[18039, 442, 729, 20, 37, "Input", "ExpressionUUID" -> \
+"b534a9b0-5d75-4a3a-a24d-2f91be1b1ccb"],
+Cell[18771, 464, 16082, 329, 275, "Input", "ExpressionUUID" -> \
+"98ba5748-de69-4ee8-a846-94c8ef8ad9aa"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34890, 798, 198, 3, 72, "Section", "ExpressionUUID" -> \
+"570b3dee-67db-4e64-b96f-32ec0a14813e"],
+Cell[35091, 803, 565, 12, 37, "Input", "ExpressionUUID" -> \
+"5a592a03-78ea-4529-bce1-6da2166f7411"],
+Cell[35659, 817, 1968, 47, 134, "Input", "ExpressionUUID" -> \
+"bea04d3c-0173-46bb-a6bf-abd8f4d66fd7"],
+Cell[37630, 866, 406, 11, 37, "Input", "ExpressionUUID" -> \
+"3054ab2e-51dc-4be9-831d-58465a1d8e9c"],
+Cell[38039, 879, 1426, 32, 37, "Input", "ExpressionUUID" -> \
+"82f26ca2-7a43-46df-9792-591b6011978d"],
+Cell[39468, 913, 2571, 46, 134, "Input", "ExpressionUUID" -> \
+"d4a8c2fb-2168-41ac-9e61-112fff497708"],
+Cell[42042, 961, 3244, 61, 186, "Input", "ExpressionUUID" -> \
+"ee20e328-af82-4f45-86ba-cce96f5a184c"],
+Cell[45289, 1024, 1579, 35, 37, "Input", "ExpressionUUID" -> \
+"97690501-d9d3-4480-a620-47a02ce52322"],
+Cell[46871, 1061, 608, 17, 110, "Input", "ExpressionUUID" -> \
+"9159ba17-a9bb-430b-b748-a64fc9c7fc93"],
+Cell[47482, 1080, 2777, 54, 238, "Code", "ExpressionUUID" -> \
+"09dc4a43-e30a-48ec-b6f6-402da57421b9"],
+Cell[50262, 1136, 467, 13, 37, "Input", "ExpressionUUID" -> \
+"63acbf94-26ee-40a6-8b18-63e4bd2dc538"],
+Cell[50732, 1151, 668, 18, 37, "Input", "ExpressionUUID" -> \
+"b25b9dfe-eab4-45c0-84e9-3d8e6807feb0"],
+Cell[51403, 1171, 158, 3, 37, "Input", "ExpressionUUID" -> \
+"71e8a75c-6787-4a6e-87ec-7d6466621321"],
+Cell[51564, 1176, 1767, 47, 110, "Input", "ExpressionUUID" -> \
+"60f8688f-3c1c-4198-a040-44b5b24f1745"],
+Cell[CellGroupData[{
+Cell[53356, 1227, 182, 3, 58, "Subsection", "ExpressionUUID" -> \
+"9b14942b-a0d3-44e4-8dbd-bbfdecad5ff0"],
+Cell[53541, 1232, 539, 11, 37, "Input", "ExpressionUUID" -> \
+"eacca747-c31e-4d33-8f75-e40bf9b7aa89"],
+Cell[54083, 1245, 271, 6, 37, "Input", "ExpressionUUID" -> \
+"c23f2959-549c-4e0c-8b04-1e97bd3c1ec3"],
+Cell[54357, 1253, 1005, 21, 37, "Input", "ExpressionUUID" -> \
+"525e73be-76ac-4bea-b8dc-83d3a98d819c"],
+Cell[55365, 1276, 706, 14, 37, "Input", "ExpressionUUID" -> \
+"928f47a1-3ab3-4171-b877-f0d8e7b754a6"],
+Cell[56074, 1292, 412, 9, 37, "Input", "ExpressionUUID" -> \
+"b1ef2bbb-f392-4c85-864b-ab6610fff44f"],
+Cell[56489, 1303, 1730, 35, 110, "Input", "ExpressionUUID" -> \
+"b19ad6c2-b240-4b70-b49c-9ff0d4c4145d"],
+Cell[58222, 1340, 1266, 22, 86, "Input", "ExpressionUUID" -> \
+"4616c8d6-7f54-4595-8ae7-dfa94fc63e8d"],
+Cell[59491, 1364, 1268, 33, 37, "Input", "ExpressionUUID" -> \
+"7c764062-ca68-408a-9a4b-2680f811f7f1"],
+Cell[60762, 1399, 206, 4, 37, "Input", "ExpressionUUID" -> \
+"65c2acbc-d026-4d5d-9725-9752bd90359a"],
+Cell[60971, 1405, 265, 6, 37, "Input", "ExpressionUUID" -> \
+"5219be1d-da32-4a92-8a0a-73bfe331b913"],
+Cell[61239, 1413, 516, 11, 37, "Input", "ExpressionUUID" -> \
+"9a5b8d9b-322e-4fe2-9c5c-a628bf0d9a24"],
+Cell[61758, 1426, 941, 16, 37, "Input", "ExpressionUUID" -> \
+"1ef5f042-33d8-4237-9245-262fccc2d511"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[62736, 1447, 175, 3, 58, "Subsection", "ExpressionUUID" -> \
+"4d38063d-24ff-4a30-baa9-f4d214c8b512"],
+Cell[62914, 1452, 328, 8, 37, "Input", "ExpressionUUID" -> \
+"4f3e5d52-17fa-401d-bc60-bbcdddcd5997"],
+Cell[63245, 1462, 328, 8, 37, "Input", "ExpressionUUID" -> \
+"df7f71a8-5b05-4748-8dcc-8038a534981c"],
+Cell[63576, 1472, 210, 5, 37, "Input", "ExpressionUUID" -> \
+"04cb170e-c3a6-456e-9546-941247b9fdd6"],
+Cell[63789, 1479, 164, 3, 37, "Input", "ExpressionUUID" -> \
+"3d65a29a-ec87-494d-9c7f-173531ec57ba"],
+Cell[63956, 1484, 165, 3, 37, "Input", "ExpressionUUID" -> \
+"774aa212-5173-4c59-baf1-f9e4d020da7f"],
+Cell[64124, 1489, 494, 11, 37, "Input", "ExpressionUUID" -> \
+"d027c930-5028-4b32-9c74-bd9e442b3ad7"],
+Cell[64621, 1502, 695, 13, 37, "Input", "ExpressionUUID" -> \
+"f4e19bd8-e6f9-488a-827b-ad71de6e81f6"],
+Cell[65319, 1517, 488, 10, 37, "Input", "ExpressionUUID" -> \
+"0b4a7efd-e75f-435c-9671-d32b418980d1"],
+Cell[65810, 1529, 149, 3, 62, "Input", "ExpressionUUID" -> \
+"7c800e2e-974e-48c6-9e7d-64fba4f4ef27"],
+Cell[65962, 1534, 1240, 24, 37, "Input", "ExpressionUUID" -> \
+"004c4fa2-bdb3-47c8-8567-01469098eb88"],
+Cell[67205, 1560, 3160, 63, 110, "Input", "ExpressionUUID" -> \
+"d8f70469-9f6d-4435-9dc6-863dd0c76cb0"],
+Cell[70368, 1625, 984, 26, 37, "Input", "ExpressionUUID" -> \
+"5c6558cc-0ee1-43aa-842a-2a7ef9532ada"],
+Cell[71355, 1653, 1152, 31, 37, "Input", "ExpressionUUID" -> \
+"ba327fcc-5ec3-4ace-93dc-7cc80eb36a62"],
+Cell[72510, 1686, 314, 8, 39, "Input", "ExpressionUUID" -> \
+"971bcfa7-c3bb-45cb-b7a8-34b47cd9180c"],
+Cell[72827, 1696, 302, 8, 37, "Input", "ExpressionUUID" -> \
+"d0e3aad3-9fdb-4c65-98ae-3cc02b850390"],
+Cell[73132, 1706, 312, 8, 37, "Input", "ExpressionUUID" -> \
+"1d987419-d383-42e8-a0bd-17671430974f"],
+Cell[73447, 1716, 1291, 29, 50, "Input", "ExpressionUUID" -> \
+"2948fc65-088c-4b85-9eba-24ab7487e50f"],
+Cell[74741, 1747, 329, 8, 37, "Input", "ExpressionUUID" -> \
+"a227fa7e-2a4d-4feb-9d6b-0f5bbc2be1e5"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
